@@ -1,0 +1,661 @@
+{
+  "name": "skillmcp",
+  "version": "1.0.0",
+  "category": "ai-tool",
+  "license": "MIT",
+  "runtime": "Claude Code, opencode, or any agent runtime that loads SKILL.md files",
+  "description": "50 validated skills for running a skills server over MCP stdio: wiring clients, designing tools, invoking them without wasting context, verifying the protocol, governing side effects and publishing packs.",
+  "skill_count": 50,
+  "skills": [
+    {
+      "slug": "stdio-client-config",
+      "title": "Stdio Client Config",
+      "description": "Wire a stdio MCP server into a client config so the agent can call it without a restart loop. Use when a skill or tool server exists on disk and the agent runtime needs a config entry for it",
+      "path": "skills/stdio-client-config/SKILL.md",
+      "tags": [
+        "setup",
+        "mcp",
+        "configuration"
+      ],
+      "meta_phase": "setup",
+      "sha256": "fcac9f920a3df4007b0937752c28130c47553f28519b3b5dd9f5450a3b5a98e9"
+    },
+    {
+      "slug": "transport-choice",
+      "title": "Transport Choice",
+      "description": "Pick stdio or a network transport deliberately, based on where the server and its data actually live. Use when a new server is being designed and the transport decision is still open",
+      "path": "skills/transport-choice/SKILL.md",
+      "tags": [
+        "setup",
+        "mcp",
+        "transport"
+      ],
+      "meta_phase": "setup",
+      "sha256": "042c81a4af7e9fcd72a42fd24d74b283dfacc352ce660663b52d7872a46bd03e"
+    },
+    {
+      "slug": "protocol-version-handshake",
+      "title": "Protocol Version Handshake",
+      "description": "Negotiate the protocol revision explicitly and pin the one the server actually implements. Use when the client may run a different protocol revision than the server was written against",
+      "path": "skills/protocol-version-handshake/SKILL.md",
+      "tags": [
+        "setup",
+        "mcp",
+        "protocol"
+      ],
+      "meta_phase": "setup",
+      "sha256": "fe639a1c2771f40eb1347deecf2d8c03b2acede4f8d4242011d165fd3ab550d0"
+    },
+    {
+      "slug": "capability-negotiation-check",
+      "title": "Capability Negotiation Check",
+      "description": "Declare only the capabilities the server implements and refuse calls outside them. Use when the server exposes tools and the client must know whether to look for resources or prompts",
+      "path": "skills/capability-negotiation-check/SKILL.md",
+      "tags": [
+        "setup",
+        "mcp",
+        "capabilities"
+      ],
+      "meta_phase": "setup",
+      "sha256": "764c2e418c187a8cfaef098747b9d3fed11ee5ee9296103a392a03e9a2f93f8e"
+    },
+    {
+      "slug": "server-discovery-and-trust",
+      "title": "Server Discovery and Trust",
+      "description": "Decide which third-party tool servers to load by reading what they do before granting them a call surface. Use when an agent is about to be pointed at a server you did not write",
+      "path": "skills/server-discovery-and-trust/SKILL.md",
+      "tags": [
+        "setup",
+        "trust",
+        "supply-chain"
+      ],
+      "meta_phase": "setup",
+      "sha256": "1b8117e2719ab77d44a21a724b6d5816c6b5b2512cbded7b98e93d6bba7ac1a3"
+    },
+    {
+      "slug": "local-vs-remote-boundary",
+      "title": "Local Versus Remote Boundary",
+      "description": "Keep a local file-reading server local, and state the trust boundary before anything crosses it. Use when a tool server could be exposed on a port to serve several agents",
+      "path": "skills/local-vs-remote-boundary/SKILL.md",
+      "tags": [
+        "setup",
+        "boundary",
+        "network"
+      ],
+      "meta_phase": "setup",
+      "sha256": "c09ef0d9d19bf1f7d0d4f9b2dfd3b9b2d016163b4d7594921cb7ca705a4f2b7b"
+    },
+    {
+      "slug": "secrets-via-environment",
+      "title": "Secrets Via Environment",
+      "description": "Pass credentials through the environment so they never appear in process arguments or config files. Use when a tool server needs a token to call an external service on the agent's behalf",
+      "path": "skills/secrets-via-environment/SKILL.md",
+      "tags": [
+        "setup",
+        "secrets",
+        "process"
+      ],
+      "meta_phase": "setup",
+      "sha256": "586c42250a25fe81239a18a24a260293a9b75780e0c18e19bfafbb575dd9387f"
+    },
+    {
+      "slug": "restart-and-reload-semantics",
+      "title": "Restart and Reload Semantics",
+      "description": "Know what the server caches and what needs a restart, so stale data never masquerades as a bug. Use when packs or skills change on disk while a client session is running",
+      "path": "skills/restart-and-reload-semantics/SKILL.md",
+      "tags": [
+        "setup",
+        "reload",
+        "operations"
+      ],
+      "meta_phase": "setup",
+      "sha256": "3e36b43fb7c1cb0649e515466ef0b713ab4eae91a8925768fae99253455d445f"
+    },
+    {
+      "slug": "tool-verb-naming",
+      "title": "Tool Verb Naming",
+      "description": "Name tools after the action they perform so a model chooses correctly from the name alone. Use when a new tool is being added and the name is still free-form",
+      "path": "skills/tool-verb-naming/SKILL.md",
+      "tags": [
+        "design",
+        "naming",
+        "tools"
+      ],
+      "meta_phase": "design",
+      "sha256": "dddd984d10adfa279e1b8536785132c8cd8456a04781854a58222029ac7d1439"
+    },
+    {
+      "slug": "input-schema-strictness",
+      "title": "Input Schema Strictness",
+      "description": "Make the input schema the only place argument rules live, and refuse anything outside it. Use when a tool accepts structured arguments that a model will construct from context",
+      "path": "skills/input-schema-strictness/SKILL.md",
+      "tags": [
+        "design",
+        "schema",
+        "validation"
+      ],
+      "meta_phase": "design",
+      "sha256": "339f558fece1d107ad1e15646939cee8260b099621190e3d5d473f247735e42e"
+    },
+    {
+      "slug": "bounded-output-design",
+      "title": "Bounded Output Design",
+      "description": "Cap every response so one tool call cannot fill an agent's context window. Use when a tool can return an unbounded list, a full file or a large body",
+      "path": "skills/bounded-output-design/SKILL.md",
+      "tags": [
+        "design",
+        "output",
+        "context"
+      ],
+      "meta_phase": "design",
+      "sha256": "cc72a131fa89ed66abff0bcf8a9d88c76186b752ad1bd8b51b838bc6b77402b7"
+    },
+    {
+      "slug": "error-shape-for-agents",
+      "title": "Error Shape For Agents",
+      "description": "Return errors an agent can act on: what failed, why, and the next call that would work. Use when a tool can fail because of bad arguments, missing files or an empty result",
+      "path": "skills/error-shape-for-agents/SKILL.md",
+      "tags": [
+        "design",
+        "errors",
+        "agents"
+      ],
+      "meta_phase": "design",
+      "sha256": "01fa017e310d01eccb0c61185cafa5112a569e2e293cc32e523bd5450a3db175"
+    },
+    {
+      "slug": "idempotency-annotation",
+      "title": "Idempotency Annotation",
+      "description": "Mark which tools change state so a retry after a timeout cannot duplicate an action. Use when a tool writes to disk, sends a request or mutates a remote record",
+      "path": "skills/idempotency-annotation/SKILL.md",
+      "tags": [
+        "design",
+        "idempotency",
+        "retries"
+      ],
+      "meta_phase": "design",
+      "sha256": "6de549adabf26e6389089c2beac7b2da28087a6c5cf9259789b4179905677f9a"
+    },
+    {
+      "slug": "tool-surface-minimisation",
+      "title": "Tool Surface Minimisation",
+      "description": "Ship the fewest tools that cover the workflow, because every extra tool is a wrong choice waiting to happen. Use when a server is accumulating tools and the list is getting hard for a model to choose from",
+      "path": "skills/tool-surface-minimisation/SKILL.md",
+      "tags": [
+        "design",
+        "surface",
+        "discipline"
+      ],
+      "meta_phase": "design",
+      "sha256": "3703e1494e12945c2d4263372f61d1294c2f698e1737d4b632a2d2e2e26586d2"
+    },
+    {
+      "slug": "destructive-tool-gating",
+      "title": "Destructive Tool Gating",
+      "description": "Require an explicit target and an explicit intent for any tool that deletes or overwrites. Use when a server exposes a tool that changes or removes data the agent did not create",
+      "path": "skills/destructive-tool-gating/SKILL.md",
+      "tags": [
+        "design",
+        "destructive",
+        "safety"
+      ],
+      "meta_phase": "design",
+      "sha256": "b4cde3cda277d053d1efe5129a9ed06a4d10a5dc7ebea6ae2ae8b437279a935b"
+    },
+    {
+      "slug": "description-as-contract",
+      "title": "Description as Contract",
+      "description": "Write tool descriptions as the contract a model will follow, including what the tool does not do. Use when an agent must choose between tools without seeing the implementation",
+      "path": "skills/description-as-contract/SKILL.md",
+      "tags": [
+        "design",
+        "documentation",
+        "agents"
+      ],
+      "meta_phase": "design",
+      "sha256": "8b62c1482672b7fb817d03a1bf4260416a3a4068c0c4491c4f784ab316e983cc"
+    },
+    {
+      "slug": "search-then-fetch-pattern",
+      "title": "Search Then Fetch Pattern",
+      "description": "Search first, fetch second, so context is spent on the one procedure that fits the task. Use when a corpus of skills or documents is larger than the context available for reading it",
+      "path": "skills/search-then-fetch-pattern/SKILL.md",
+      "tags": [
+        "invoke",
+        "workflow",
+        "context"
+      ],
+      "meta_phase": "invoke",
+      "sha256": "5527f5df911e500693cb5b0d21270a140b51ca67cbcb0a89f4d83fdc94773ac5"
+    },
+    {
+      "slug": "tool-call-budgeting",
+      "title": "Tool Call Budgeting",
+      "description": "Decide the call budget for a task before starting so an agent cannot loop on a tool. Use when an agent may retry or search repeatedly and each call costs context and latency",
+      "path": "skills/tool-call-budgeting/SKILL.md",
+      "tags": [
+        "invoke",
+        "budget",
+        "discipline"
+      ],
+      "meta_phase": "invoke",
+      "sha256": "d21b45f3079fbfe09c5fc7365067911893aecd6a94489f648a259d8202af43dd"
+    },
+    {
+      "slug": "parallel-tool-call-safety",
+      "title": "Parallel Tool Call Safety",
+      "description": "Only parallelise calls that are independent, and never parallelise anything that writes. Use when several lookups are needed and latency matters",
+      "path": "skills/parallel-tool-call-safety/SKILL.md",
+      "tags": [
+        "invoke",
+        "concurrency",
+        "safety"
+      ],
+      "meta_phase": "invoke",
+      "sha256": "e83c4c3588fe732e056d09419574fb1e5669789f608f319886d737598f56b4a9"
+    },
+    {
+      "slug": "argument-construction-from-artifacts",
+      "title": "Argument Construction From Artifacts",
+      "description": "Build tool arguments from captured artifacts rather than from memory, so ids and paths are exact. Use when a tool needs an identifier that already exists in a capture, report or file",
+      "path": "skills/argument-construction-from-artifacts/SKILL.md",
+      "tags": [
+        "invoke",
+        "arguments",
+        "accuracy"
+      ],
+      "meta_phase": "invoke",
+      "sha256": "6c0b10a525b0af4f94ccacb25f64f0843145d042e4dfa29c1c6a0524cd0d2b50"
+    },
+    {
+      "slug": "tool-error-without-retry-storm",
+      "title": "Tool Error Without Retry Storm",
+      "description": "Distinguish transient from deterministic tool failures so a retry cannot become a loop. Use when a tool call fails and the next action is still undecided",
+      "path": "skills/tool-error-without-retry-storm/SKILL.md",
+      "tags": [
+        "invoke",
+        "errors",
+        "retries"
+      ],
+      "meta_phase": "invoke",
+      "sha256": "cbe0ecda6197ae862c82808f95a1a3da35518161cf3ae35a215b41ea1e120d67"
+    },
+    {
+      "slug": "pagination-and-limit-discipline",
+      "title": "Pagination and Limit Discipline",
+      "description": "Page through results deliberately and stop when the remaining results stop being useful. Use when a tool returns a truncated list with a total count",
+      "path": "skills/pagination-and-limit-discipline/SKILL.md",
+      "tags": [
+        "invoke",
+        "pagination",
+        "context"
+      ],
+      "meta_phase": "invoke",
+      "sha256": "1b3dde59cbb6d2553fa47369aa0e5a73630befc54608ca76770af551c00cc992"
+    },
+    {
+      "slug": "deterministic-command-choices",
+      "title": "Deterministic Command Choices",
+      "description": "Prefer commands whose output does not depend on locale, globbing or shell state. Use when an agent constructs commands that a shell will interpret before the tool sees them",
+      "path": "skills/deterministic-command-choices/SKILL.md",
+      "tags": [
+        "invoke",
+        "shell",
+        "determinism"
+      ],
+      "meta_phase": "invoke",
+      "sha256": "06cc2d2b8f9b63e9a781601608632e9c713153f539f6c695dc1f23458e92c8ed"
+    },
+    {
+      "slug": "context-window-management",
+      "title": "Context Window Management",
+      "description": "Spend context on the procedure you will follow, not on everything the server could return. Use when a session accumulates tool output and the budget for reasoning is shrinking",
+      "path": "skills/context-window-management/SKILL.md",
+      "tags": [
+        "invoke",
+        "context",
+        "efficiency"
+      ],
+      "meta_phase": "invoke",
+      "sha256": "fb8988062cdafd35cd41ac37635ab3a543a0575e82c73f19b3fdccb376fbd44b"
+    },
+    {
+      "slug": "verify-tool-output-before-reporting",
+      "title": "Verify Tool Output Before Reporting",
+      "description": "Treat tool output as an observation to check, never as a conclusion to publish. Use when a tool result will be quoted in a report, ticket or decision",
+      "path": "skills/verify-tool-output-before-reporting/SKILL.md",
+      "tags": [
+        "invoke",
+        "verification",
+        "evidence"
+      ],
+      "meta_phase": "invoke",
+      "sha256": "1b8aec27c50b55eb106ec05ecdeb2a2b343ecaa29619c771111d6a3bcb1212a9"
+    },
+    {
+      "slug": "protocol-conformance-test",
+      "title": "Protocol Conformance Test",
+      "description": "Test the wire protocol directly, so a client bug and a server bug are distinguishable. Use when a client reports a failure and the server's own behaviour is unproven",
+      "path": "skills/protocol-conformance-test/SKILL.md",
+      "tags": [
+        "verify",
+        "protocol",
+        "testing"
+      ],
+      "meta_phase": "verify",
+      "sha256": "4fc66e1e4f79b28b085baa6290c98a9a53c9bdaca63d6ed7e9588cdfe3cb6835"
+    },
+    {
+      "slug": "lifecycle-test-initialize-then-tools",
+      "title": "Lifecycle Test Initialize Then Tools",
+      "description": "Prove the handshake before the tool list, because a client never calls tools on a failed initialize. Use when a new server is being validated against a real client for the first time",
+      "path": "skills/lifecycle-test-initialize-then-tools/SKILL.md",
+      "tags": [
+        "verify",
+        "lifecycle",
+        "handshake"
+      ],
+      "meta_phase": "verify",
+      "sha256": "4241604124ff2f72acca83a9304c1f2ab4873826a354aa3cc6ebff8005fd2384"
+    },
+    {
+      "slug": "tools-list-schema-validation",
+      "title": "Tools List Schema Validation",
+      "description": "Validate every advertised schema as JSON Schema before a client tries to obey it. Use when a tool's input schema was edited and clients construct arguments from it",
+      "path": "skills/tools-list-schema-validation/SKILL.md",
+      "tags": [
+        "verify",
+        "schema",
+        "tools"
+      ],
+      "meta_phase": "verify",
+      "sha256": "2aa22d6a9bafa3e855946f7ee47d72fb97d65f21e3432bfc16a7fc5e85b1bae2"
+    },
+    {
+      "slug": "tool-call-error-paths",
+      "title": "Tool Call Error Paths",
+      "description": "Exercise each error path deliberately so a bad argument cannot produce a silent success. Use when a tool validates arguments and the failure branches are untested",
+      "path": "skills/tool-call-error-paths/SKILL.md",
+      "tags": [
+        "verify",
+        "errors",
+        "testing"
+      ],
+      "meta_phase": "verify",
+      "sha256": "3d4c2419ce0780e8446c2f0428fdd640864f0b21458fc33b8ae44247f8be282b"
+    },
+    {
+      "slug": "fixture-driven-transcript-tests",
+      "title": "Fixture Driven Transcript Tests",
+      "description": "Keep a request/response transcript on disk and assert the server still matches it. Use when a protocol server has behaviours that must not drift across refactors",
+      "path": "skills/fixture-driven-transcript-tests/SKILL.md",
+      "tags": [
+        "verify",
+        "fixtures",
+        "regression"
+      ],
+      "meta_phase": "verify",
+      "sha256": "79d05fb5a1d49a03c42bd5931f2f57efec6b1ab599951c19cf1dde63e6c44d52"
+    },
+    {
+      "slug": "stdout-purity-check",
+      "title": "Stdout Purity Check",
+      "description": "Assert that stdout carries only protocol messages, because one stray print breaks every client. Use when the server logs, warns or prints anything during normal operation",
+      "path": "skills/stdout-purity-check/SKILL.md",
+      "tags": [
+        "verify",
+        "stdio",
+        "protocol"
+      ],
+      "meta_phase": "verify",
+      "sha256": "b99115b9246666f4374310f22cb5cc3d445218748c1c329bae40150aae5ceadb"
+    },
+    {
+      "slug": "concurrency-and-ordering-check",
+      "title": "Concurrency and Ordering Check",
+      "description": "Send several requests at once and confirm replies stay attributable and the server stays consistent. Use when the server indexes files or holds state that concurrent calls could race on",
+      "path": "skills/concurrency-and-ordering-check/SKILL.md",
+      "tags": [
+        "verify",
+        "concurrency",
+        "ordering"
+      ],
+      "meta_phase": "verify",
+      "sha256": "d5981ffab26af09a5f95bc47772b8d8dec48cd426a341d4d28a5d372c1716bf4"
+    },
+    {
+      "slug": "replay-transcript-for-regression",
+      "title": "Replay Transcript For Regression",
+      "description": "Re-run a stored session against a new build to catch protocol drift before a client does. Use when the server is about to be released and its wire behaviour must not change",
+      "path": "skills/replay-transcript-for-regression/SKILL.md",
+      "tags": [
+        "verify",
+        "regression",
+        "release"
+      ],
+      "meta_phase": "verify",
+      "sha256": "342dc01811eb4360e7d1fb64047202def96b0a9b89d535bdf39649add283a7b6"
+    },
+    {
+      "slug": "scope-guard-before-execution",
+      "title": "Scope Guard Before Execution",
+      "description": "Check the engagement scope before a tool touches a target, and refuse rather than warn. Use when a tool can act on arbitrary hosts and the agent may have the wrong target in context",
+      "path": "skills/scope-guard-before-execution/SKILL.md",
+      "tags": [
+        "govern",
+        "scope",
+        "safety"
+      ],
+      "meta_phase": "govern",
+      "sha256": "325df7a9ed1461b5666746c9ed23d09ff26ec34ddbfd48cda2576bac877f97c3"
+    },
+    {
+      "slug": "rate-limit-respect",
+      "title": "Rate Limit Respect",
+      "description": "Keep the server and its caller under whatever limits the target or host imposes. Use when tool calls cause outbound work, indexing scans or remote requests",
+      "path": "skills/rate-limit-respect/SKILL.md",
+      "tags": [
+        "govern",
+        "rate-limit",
+        "backpressure"
+      ],
+      "meta_phase": "govern",
+      "sha256": "0879c3837eeed4571b51e9faa6ba029e2a104f6ea72fb8b999607ca3066a2bfa"
+    },
+    {
+      "slug": "credential-isolation",
+      "title": "Credential Isolation",
+      "description": "Give the server its own credential scope so a compromised tool call cannot reach everything. Use when the server calls an upstream service on behalf of the agent",
+      "path": "skills/credential-isolation/SKILL.md",
+      "tags": [
+        "govern",
+        "credentials",
+        "least-privilege"
+      ],
+      "meta_phase": "govern",
+      "sha256": "100173365b78050ebd48a44333057bd5499d0172644a6e702a9579ffcf1b547e"
+    },
+    {
+      "slug": "audit-log-of-tool-calls",
+      "title": "Audit Log of Tool Calls",
+      "description": "Log every call with arguments and outcome so an agent's actions can be reconstructed. Use when the server can change state or reach anything outside its own directory",
+      "path": "skills/audit-log-of-tool-calls/SKILL.md",
+      "tags": [
+        "govern",
+        "audit",
+        "logging"
+      ],
+      "meta_phase": "govern",
+      "sha256": "7bc664705415aeb042ebd555113558556893cbe95c039df4bdce263214d44b83"
+    },
+    {
+      "slug": "destructive-action-confirmation",
+      "title": "Destructive Action Confirmation",
+      "description": "Require a second, explicit signal before a destructive call leaves a trace that cannot be undone. Use when the server exposes a tool whose effect cannot be reversed by the caller",
+      "path": "skills/destructive-action-confirmation/SKILL.md",
+      "tags": [
+        "govern",
+        "confirmation",
+        "safety"
+      ],
+      "meta_phase": "govern",
+      "sha256": "e4573ee808a604c129ed2d8d914d956966b16bc08295b0264b838de1467f508f"
+    },
+    {
+      "slug": "data-retention-policy",
+      "title": "Data Retention Policy",
+      "description": "Decide how long tool inputs, outputs and logs live, and make deletion real rather than implied. Use when the server stores captures, findings or credentials-adjacent data",
+      "path": "skills/data-retention-policy/SKILL.md",
+      "tags": [
+        "govern",
+        "retention",
+        "privacy"
+      ],
+      "meta_phase": "govern",
+      "sha256": "bc94f61f185101cce82a76637ce2b3752f165bd9bad500ce6f913418cef4d313"
+    },
+    {
+      "slug": "least-privilege-tool-grants",
+      "title": "Least Privilege Tool Grants",
+      "description": "Grant the agent only the tools it needs for the current task, not the whole server surface. Use when a client can restrict which tools an agent may call",
+      "path": "skills/least-privilege-tool-grants/SKILL.md",
+      "tags": [
+        "govern",
+        "least-privilege",
+        "grants"
+      ],
+      "meta_phase": "govern",
+      "sha256": "e26a2eeef34ba2299965f23910d49991e11a1018c106dbca87b42fbae62f2975"
+    },
+    {
+      "slug": "third-party-server-sandboxing",
+      "title": "Third Party Server Sandboxing",
+      "description": "Run untrusted tool servers with the smallest filesystem and network reach that still works. Use when a server you did not write is part of the toolchain",
+      "path": "skills/third-party-server-sandboxing/SKILL.md",
+      "tags": [
+        "govern",
+        "sandbox",
+        "isolation"
+      ],
+      "meta_phase": "govern",
+      "sha256": "0e35326a2d9419a8725a4bdf40b7743e88c6377652fca7df914dec99322bd011"
+    },
+    {
+      "slug": "human-in-the-loop-escalation",
+      "title": "Human in the Loop Escalation",
+      "description": "Define the decisions an agent must hand back to a person instead of making alone. Use when an agent can act on systems where a wrong call is expensive or irreversible",
+      "path": "skills/human-in-the-loop-escalation/SKILL.md",
+      "tags": [
+        "govern",
+        "escalation",
+        "process"
+      ],
+      "meta_phase": "govern",
+      "sha256": "96e9accadb2ac085ac4d0cd8806ca650b2196df4f45269eacf8b5a982a1a20b0"
+    },
+    {
+      "slug": "skill-frontmatter-contract",
+      "title": "Skill Frontmatter Contract",
+      "description": "Keep the frontmatter fields identical across a pack so any loader can index it without special cases. Use when skills from several packs will be loaded by one runtime or one index",
+      "path": "skills/skill-frontmatter-contract/SKILL.md",
+      "tags": [
+        "document",
+        "frontmatter",
+        "interoperability"
+      ],
+      "meta_phase": "document",
+      "sha256": "801511890bb28743aa4b9f98080bc7880b1a482932ec02fa32418772efa09ccb"
+    },
+    {
+      "slug": "one-procedure-per-skill",
+      "title": "One Procedure Per Skill",
+      "description": "Keep each skill to a single reproducible procedure so an agent can follow it without branching. Use when a skill has grown into a survey of several unrelated techniques",
+      "path": "skills/one-procedure-per-skill/SKILL.md",
+      "tags": [
+        "document",
+        "scope",
+        "structure"
+      ],
+      "meta_phase": "document",
+      "sha256": "ebfb4cb67d5644635fad37b329404238c4945bbf6db6e900cb2be0e991dac995"
+    },
+    {
+      "slug": "when-to-use-and-avoid",
+      "title": "When to Use and Avoid",
+      "description": "State both conditions so an agent can decline a skill that does not fit the target. Use when a skill is broad enough to be tempting in situations where it is wrong",
+      "path": "skills/when-to-use-and-avoid/SKILL.md",
+      "tags": [
+        "document",
+        "selection",
+        "clarity"
+      ],
+      "meta_phase": "document",
+      "sha256": "ade6ff4d6f90c49d83befd948b2dca58529292b29a9c5dc49bf48a2a52b3915b"
+    },
+    {
+      "slug": "signal-and-pitfall-sections",
+      "title": "Signal and Pitfall Sections",
+      "description": "Write signals as observations and pitfalls as the mistakes that produce false findings. Use when a skill needs to help a reader decide mid-procedure whether they are on track",
+      "path": "skills/signal-and-pitfall-sections/SKILL.md",
+      "tags": [
+        "document",
+        "signals",
+        "pitfalls"
+      ],
+      "meta_phase": "document",
+      "sha256": "bc047112dc20515b168388deb4f523413d5247f4a9025f381c4ae4e1527ca70f"
+    },
+    {
+      "slug": "done-when-criteria",
+      "title": "Done When Criteria",
+      "description": "Define completion as observable artifacts so a skill cannot be declared finished on vibes. Use when a procedure has several steps and the endpoint of the work is ambiguous",
+      "path": "skills/done-when-criteria/SKILL.md",
+      "tags": [
+        "document",
+        "completion",
+        "discipline"
+      ],
+      "meta_phase": "document",
+      "sha256": "e47a69acab948fb92530711657e96d4876aeb121084b3d470beb50ded530e317"
+    },
+    {
+      "slug": "reference-canonicalisation",
+      "title": "Reference Canonicalisation",
+      "description": "Cite canonical https references so a link keeps working after the pack is published. Use when a skill cites a specification, vendor document or research post",
+      "path": "skills/reference-canonicalisation/SKILL.md",
+      "tags": [
+        "document",
+        "references",
+        "durability"
+      ],
+      "meta_phase": "document",
+      "sha256": "d273bd834e924b24b3b2b3c64afb70fc7e4bfba7ab3cb6412362ba1f196229e0"
+    },
+    {
+      "slug": "changelog-and-versioning",
+      "title": "Changelog and Versioning",
+      "description": "Version a pack so consumers know when a skill's meaning changed, not just its wording. Use when a pack is consumed by another project, an agent runtime or a pinned install",
+      "path": "skills/changelog-and-versioning/SKILL.md",
+      "tags": [
+        "document",
+        "versioning",
+        "release"
+      ],
+      "meta_phase": "document",
+      "sha256": "0a2c115ac04eb224ff7d93c9ccab627b01eb8ea0ef6a34c9542e09960daaefee"
+    },
+    {
+      "slug": "publishing-a-pack-locally",
+      "title": "Publishing a Pack Locally",
+      "description": "Lay out a pack so any skill-aware runtime recognises it without a bespoke loader. Use when a new skill pack is ready to be used by an agent runtime on the same machine",
+      "path": "skills/publishing-a-pack-locally/SKILL.md",
+      "tags": [
+        "document",
+        "publishing",
+        "layout"
+      ],
+      "meta_phase": "document",
+      "sha256": "6d14e865b3e67174a53c21b8c7f3da56522ef4c233ff30884e8ff7aa008678cf"
+    }
+  ]
+}

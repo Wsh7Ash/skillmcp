@@ -1,0 +1,20 @@
+$ skillmcp index --packs-root .
+skillmcp       1.0.0    ai-tool               50 skills
+-- 1 packs, 50 skills
+
+$ printf <initialize|tools/list|search_skills> | skillmcp serve | jq -c .
+{"id": 1, "protocolVersion": "2025-03-26", "capabilities": {"tools": {"listChanged": false}}, "serverInfo": {"name": "skillmcp", "version": "1.0.0"}}
+{"id": 2, "tools": ["list_packs", "search_skills", "get_skill"]}
+{"id": 3, "matches": ["stdout-purity-check"], "total": 1}
+{"id": 4, "error": -32601, "message": "unknown method 'nope'"}
+{"id": null, "error": -32700, "message": "invalid JSON: Expecting value"}
+
+$ skillmcp call get_skill --args ... (truncated)
+---
+name: stdout-purity-check
+description: "Assert that stdout carries only protocol messages, because one stray print breaks every client. Use when the server logs, warns or prints anything during normal operation"
+pack: skillmcp
+version: 1.0.0
+category: ai-tool
+tags: [verify, stdio, protocol]
+---
